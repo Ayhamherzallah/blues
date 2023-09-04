@@ -1,0 +1,215 @@
+{% extends 'layout/navbar.html' %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/product.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+{% endblock %}
+        <!-- Product section-->
+{% block content %}
+
+        <section class="hero">
+        <div class="left">
+            <img src="{{ product.image.url }}"
+                alt="" id="main">
+        </div>
+        <div class="right">
+            <div class="text">
+                <h1 id="product-name">{{ product.name }}</h1>
+                <p>{{ product.benefits }}</p>
+            </div>
+
+            <hr>
+            {% if product.variants.count > 1 %}
+
+                <form method="post" action="{% url 'addtocart' product_id=product.id %}">
+                {% csrf_token %}
+                <label for="variantSelect" class="form-label">Select:</label>
+                                    <select class="form-select" id="variantSelect" name="variant">
+                                        {% for variant in product.variants.all %}
+                                            <option value="{{ variant.id }}">
+                                            {% if variant.size %}
+                                                {{ variant.size }}
+                                            {% endif %}
+                                            {% if variant.Flavor %}
+                                                {{ variant.Flavor }}
+                                            {% endif %}
+                                                - {{ variant.price }} JDs
+                                            </option>
+                                         {% endfor %}
+                                    </select>
+                <hr>
+                <div class=" quantity">
+                    <i class='bx bx-minus'></i>
+                    <input id="q" type="text" name="quantity" value="1"/>
+                    <i class='bx bx-plus'></i>
+                </div>
+                <div class="btns">
+                    <button id="buy" type="submit">Buy Now</button>
+                    <button id="add" type="submit">Add to Cart</button>
+                </div>
+                </form>
+                {% else %}
+                 <div class="fs-5 mb-5">
+                                <form method="post" action="{% url 'addtocart' product_id=product.id %}">
+                                    {% csrf_token %}
+                                    <div>
+                                        <input type="hidden" name="variant" value="{{ variants.0.id }}">
+                                        <div class=" quantity">
+                                            <i class='bx bx-minus' id="minus"></i>
+                                            <input id="q" type="text" name="quantity" value="1"/>
+                                            <i class='bx bx-plus' id="plus"></i>
+                                        </div>
+                                        <hr>
+                                        <h2>JDs {{ product.variants.first.price }}</h2>
+                                        <div class="btns">
+                                            <button id="buy" type="submit">Buy Now</button>
+                                            <button id="add" type="submit">Add to Cart</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                {% endif %}
+
+
+
+            </div>
+    </section>
+    <section class="related">
+    <h2 id="related">Related Products:</h2>
+    <div class="product-hero">
+            {% for i in related %}
+            <div class="card">
+                <img src="{{ i.image.url }}" alt="" class="card-img">
+                <div class="card-body">
+                    <div class="card-text">
+                        <h2 class="product-name">{{ i.name }}</h2>
+                        <p class="price">{{ i.variants.first.price }} JDs</p>
+                    </div>
+                    <a href="{% url 'product' product_id=i.id %}" class="icon-div">
+                        <i class='bx bx-cart-add'></i>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+{#        <section class="py-4 main">#}
+{#            <div class="container-fluid px-4 px-lg-4 my-5">#}
+{#                <div class="row gx-4 gx-lg-4 align-items-center">#}
+{#                    <div class="col-md-6">#}
+{#                        <img class="card-img-top mb-5 mb-md-0" src="{{ product.image.url }}" alt="{{ product.name }}">#}
+{#                    </div>#}
+{#                    <div class="col-md-6">#}
+{#                        <h3 class="display-5 fw-bolder" style="color: var(--blue)">{{ product.name }}</h3>#}
+{#                            {% if product.variants.count > 1 %}#}
+{#                            <div class="fs-5 mb-5">#}
+{#                                <form method="post" action="{% url 'addtocart' product_id=product.id %}">#}
+{#                                    {% csrf_token %}#}
+{#                                    <label for="variantSelect" class="form-label">Select:</label>#}
+{#                                    <select class="form-select" id="variantSelect" name="variant">#}
+{#                                        {% for variant in product.variants.all %}#}
+{#                                            <option value="{{ variant.id }}">#}
+{#                                            {% if variant.size %}#}
+{#                                                {{ variant.size }}#}
+{#                                            {% endif %}#}
+{#                                            {% if variant.Flavor %}#}
+{#                                                {{ variant.Flavor }}#}
+{#                                            {% endif %}#}
+{#                                                - {{ variant.price }} JDs#}
+{#                                            </option>#}
+{#                                         {% endfor %}#}
+{#                                    </select>#}
+{#                                    <label for="inputQuantity" class="form-label">Quantity:</label>#}
+{#                                    <input class="form-control text-center me-3" id="inputQuantity" type="number" name="quantity" value="1" style="max-width: 4rem" />#}
+{#                                    <button class="btn flex-shrink-0 my-3" style="background-color: var(--blue); color: white" type="submit">#}
+{#                                        Add to cart#}
+{#                                    </button>#}
+{#                                </form>#}
+{#                            </div>#}
+{#                            {% else %}#}
+{#                            <div class="fs-5 mb-5">#}
+{#                                <form method="post" action="{% url 'addtocart' product_id=product.id %}">#}
+{#                                    {% csrf_token %}#}
+{#                                    <p class="lead">{{ product.benefits| safe }}</p>#}
+{#                                    <div>#}
+{#                                        <input type="hidden" name="variant" value="{{ variants.0.id }}">#}
+{#                                        <input type="hidden" name="quantity" value="1">#}
+{#                                        <h3 id="priceSpan" style="color: var(--blue)">Price: {{ product.variants.first.price }} JDs</h3#}
+{#                                        <div>#}
+{#                                            <button class="btn flex-shrink-0" type="submit" style="background-color: var(--blue); color: white">#}
+{#                                            Add to cart#}
+{#                                            </button>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </form>#}
+{#                            </div>#}
+{#                            {% endif %}#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </section>#}
+{#    <section class="py-3 bg-light">#}
+{#        <div class="container px-2">#}
+{#            <h5>{{ product.ideal_for | safe}}</h5>#}
+{#        </div>#}
+{#    </section>#}
+{#        <!-- Related items section-->#}
+{#        <section class="py-5 bg-light">#}
+{#            <div class="container px-4 px-lg-5 mt-5">#}
+{#                <h2 class="fw-bolder mb-4">Related products</h2>#}
+{#                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">#}
+{#                    {% for product in related %}#}
+{#                    <div class="col mb-5">#}
+{#                        <div class="card h-100">#}
+{#                            <!-- Product image-->#}
+{#                            <img class="card-img-top" src="{{ product.image.url }}" alt="..." />#}
+{#                            <!-- Product details-->#}
+{#                            <div class="card-body p-4">#}
+{#                                <div class="text-center">#}
+{#                                    <!-- Product name-->#}
+{#                                    <h5 class="fw-bolder">{{ product.name }}</h5>#}
+{#                                    <!-- Product price-->#}
+{#                                    {% if product.variants.count == 1 %}#}
+{#                                        {{ product.variants.first.price }} JDs#}
+{##}
+{#                                        {% else %}#}
+{##}
+{#                                            {{ min_price }}JDs - {{ max_price }}JDS#}
+{##}
+{#                                    {% endif %}#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- Product actions-->#}
+{#                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">#}
+{#                                <div class="text-center" style=""><a class="btn mt-auto" href="{% url 'product' product_id=product.id %}" style="background-color: var(--blue); color: white">View options</a></div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    {% endfor %}#}
+{#                        </div>#}
+{#                    </div>#}
+{#        </section>#}
+{##}
+{#        style sheet#}
+
+{#        <!-- Bootstrap core JS-->#}
+{#        <script src="{% static 'js/bootstrap.js' %}"></script>#}
+{#        <!-- Core theme JS-->#}
+        <script src="{% static 'js/product.js' %}"></script>
+
+
+
+{% endblock %}

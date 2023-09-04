@@ -1,0 +1,32 @@
+{% extends 'layout/dashboard.html' %}
+
+{% block content %}
+    <div class="row" style="width: calc(100% - 95px); margin-top: 70px; margin-left: 30px">
+        <div>
+            <i class="fa-sharp fa-solid fa-cart-plus text-success" style="font-size: 30px"></i>
+            <span style="font-size: 30px;margin-left: 5px" class="text-success">New Product</span>
+        </div>
+
+        <form class="col-8" style="margin-top: 30px" method="post" action="#" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name" class="form-label">Product Name</label>
+                <input type="text" class="form-control" placeholder="Product Name" name="name">
+            </div>
+            <div class="form-group" style="margin-top: 20px">
+                <label for="description" class="form-label">Product Description</label>
+                 <textarea class="form-control"  rows="4" name="des"></textarea>
+            </div>
+            <div class="form-group" style="margin-top: 20px">
+                <label for="price" class="form-label">Product Price</label>
+                <input type="number" class="form-control" placeholder="Price" name="price">
+            </div>
+            <div class="form-group" style="margin-top: 20px">
+                <label for="image" class="form-label">Product Image</label>
+                <input type="file" class="form-control" placeholder="Product Image" name="image">
+            </div>
+            <button class="btn btn-success" style="margin-top: 15px">Add Product</button>
+        </form>
+    </div>
+
+{% endblock %}

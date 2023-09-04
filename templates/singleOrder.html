@@ -1,0 +1,67 @@
+{% extends 'layout/dashboard.html' %}
+
+{% block content %}
+<div style="margin-top: 70px; margin-left: 40px; width: calc(100% - 95px)">
+    <div class="customer">
+         <i class="fa-solid fa-user" style="font-size: 30px"></i>
+        <span style="font-size: 30px; padding-left: 5px">Customer Details:</span>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="row">ID</th>
+                    <td>NAME</td>
+                    <td>PHONE</td>
+                    <td>ADDRESS</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">{{ order.id }}</th>
+                    <td>{{ order.fName}} {{ order.lName }}</td>
+                    <td>{{ order.phone }}</td>
+                    <td>{{ order.shipping }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="margin-top: 50px; width: calc(100% - 95px)">
+            <div class="row">
+                <div class="col-6">
+                     <i class="fa-sharp fa-solid fa-box" style="font-size: 30px"></i>
+                    <span style="font-size: 30px"> Order Items:</span>
+                </div>
+                <div class="col-6" style="text-align: end">
+                    <h4 class="text-success">Total: {{ orderTotal.total }} JDs</h4>
+                </div>
+
+            </div>
+
+            <table class="table table-bordered" style="margin-top: 20px">
+                  <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Image</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">size</th>
+                        <th scope="col">Flavor</th>
+                      <th scope="col">Quantity</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for item in orderItems %}
+                        <tr>
+                            <th scope="row">{{ item.product.id }}</th>
+                            <td style="width: 150px;"><img src="{{ item.product.image.url }}" style="width: 150px"></td>
+                            <td>{{ item.product.name }}</td>
+                            <td>{{ item.variant.size }}</td>
+                            <td>{{ item.variant.Flavor }}</td>
+                            <td>{{ item.quantity }}</td>
+                        </tr>
+                  {% endfor %}
+                  </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

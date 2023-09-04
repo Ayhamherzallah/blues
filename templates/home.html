@@ -1,0 +1,107 @@
+{% extends 'layout/navbar.html' %}
+{% load static %}
+
+{% block content %}
+    {#  HERO SECTION  #}
+         <div class="hero">
+            <div class="right">
+                <div class="content">
+                    <h1 class="hero-text animate">Beautiful skin begins with Blue Nature</h1>
+                    <p class="animate">Elevate Your Skincare Routine with Premium Dead Sea Products.</p>
+                    <a href="#all animate"><button >Shop Now</button></a>
+                </div>
+            </div>
+            <div class="left">
+                <img src='/media/hero-img.png' alt="" class="animate hero-img">
+            </div>
+        </div>
+
+    {#  SHOP BY CATEGORY  #}
+    <div class="categories">
+        <div class="category animate">
+            <a href="{% url 'category' category_id=1 %}">
+                <h1>Skincare</h1>
+                </a>
+                <img src="/media/Layer_1.png" alt="">
+        </div>
+        <div class="category animate">
+            <a href="{% url 'category' category_id=2 %}">
+                <h1>Bath & Spa</h1>
+                </a>
+                <img src="/media/Layer_2.png" alt="">
+        </div>
+        <div class="category animate">
+            <a href="{% url 'category' category_id=3 %}"> <h1>Soaps</h1></a>
+            <img src="/media/Layer_3.png" alt="">
+        </div>
+    </div>
+{#        OFFER  #}
+
+    <div class="offer">
+        <div class="left">
+            <img src="/media/offer.png" alt="" class="animate offer-img">
+        </div>
+        <div class="right">
+            <h1 class="animate">Buy One <span id="free">Get One For Free</span></h1>
+            <p class="animate">Buy one sunscreen from Blue Nature and get the other one for free</p>
+            <a href="{% url 'product' product_id=14%}" class="animate"><button >View</button></a>
+        </div>
+    </div>
+{#    skin care     #}
+    <div class="skin">
+        <h1 id="skin-text">Skin Care <span>Products</span> </h1>
+
+        <div class="products">
+            {% for i in skin %}
+            <div class="product-card">
+                <img src=" {{ i.image.url }}" alt="">
+                <h1>{{ i.name }}</h1>
+                <div class="box">
+                    <a href="{% url 'product' product_id=i.id %}"><button >View</button></a>
+                    <h2>{{ i.variants.first.price }}</h2>
+                </div>
+            </div>
+         {% endfor %}
+        </div>
+    </div>
+    <!-- TWO BOXES -->
+    <div class="boxes">
+        <div class="box-img hair">
+            <h1>Haircare</h1>
+            <h2>Learn More</h2>
+        </div>
+        <div class="box-img skin">
+            <h1>Skincare</h1>
+            <h2>Learn More</h2>
+        </div>
+    </div>
+{#    ALL PRODUCTS   #}
+<div class="all"  id="all">
+        <div class="head">
+            <div class="text">
+                <p>All Natural</p>
+                <p>All Products</p>
+            </div>
+            <a href="">View All ></a>
+        </div>
+        <div class="products">
+            {% for i in all %}
+            <div class="product-card">
+                <img src="{{ i.image.url }}" alt="">
+                <h1>{{ i.name }}</h1>
+                <div class="box">
+                    <a href="{% url 'product' product_id=i.id %}"><button >View</button></a>
+                    <h2>{{ i.variants.first.price }}</h2>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+</div>
+
+
+
+
+    <link rel="stylesheet" href="{% static 'css/home.css'%}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css'%}">
+    <script src="{% static 'js/home.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@10..48,200;10..48,300;10..48,400;10..48,500;10..48,600;10..48,700;10..48,800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    box-sizing: border-box;
+}
+
+
+/* HERO */
+.hero {
+    margin: 1rem 3rem;
+    height: 50vh;
+    background-image: url("/media/ds-min.png");
+    background-size: cover;
+    border-radius: 1.8125rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    position: relative;
+}
+
+h1 {
+    font-size: 3rem;
+    position: absolute;
+    bottom: 50px;
+}
+
+.search {
+    width: 40%;
+    position: absolute;
+    bottom: -25px;
+}
+
+#form {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 0.625rem;
+    box-shadow: 0px 0px 6px 3px rgba(0, 0, 0, 0.25);
+    margin-top: 2rem;
+    overflow: hidden;
+}
+
+#search {
+    text-decoration: none;
+    padding: 1rem 10rem;
+    border: none;
+    padding-left: 1rem;
+    width: 100%;
+}
+
+#search::placeholder {
+    text-align: left;
+    padding-left: 0;
+}
+
+#s-btn {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border: none;
+    background-color: #ffff;
+    cursor: pointer;
+}
+
+.bx-search {
+    font-size: 1.5rem;
+    color: #b8b7b7;
+}
+
+/* PRODUCTS */
+
+.product-hero {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+    margin-top: 4rem;
+
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 23rem;
+    width: 22vw;
+    border-radius: 0.9375rem;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.15);
+    margin-top: 1.3rem;
+    padding-bottom: 1rem;
+    overflow: hidden;
+}
+
+.card-img {
+    width: 100%;
+}
+
+.card-img:hover {
+    transform: scale(1.1);
+    transition: 0.3s ease-in-out;
+}
+
+.card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    padding: 0 1rem;
+}
+
+.product-name {
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: var(--blue);
+}
+
+.price {
+    font-weight: 400;
+    color: var(--blue);
+}
+
+.icon-div {
+    box-shadow: 0px 0px 6px 3px rgba(0, 0, 0, 0.05);
+    border-radius: 48%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+}
+
+.icon-div:hover {
+    background-color: black;
+    transition: 0.3s ease-in-out;
+}
+
+.bx-cart-add {
+    font-size: 1.2rem;
+    padding: 0.4rem 0.6rem;
+}
+
+.bx-cart-add{
+    color: var(--blue);
+}
+.bx-cart-add:hover {
+    color: white;
+    background-color: var(--blue);
+    transition: 0.3s ease-in-out;
+}
+
+
+@media (max-width:720px) {
+    .hero {
+        margin: 1rem;
+    }
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .search {
+        width: 90%;
+    }
+
+    #search {
+        padding: 1rem;
+    }
+
+    .card {
+        width: 44vw;
+        height: auto;
+    }
+}
+
+@media (max-width:400px) {
+    .card {
+        width: 42vw;
+    }
+    .hero {
+        margin: 1rem;
+    }
+
+}

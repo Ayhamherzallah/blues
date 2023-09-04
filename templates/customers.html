@@ -1,0 +1,26 @@
+{% extends 'layout/dashboard.html' %}
+
+{% block content %}
+    <div style="width: calc(100% - 95px)">
+ <table style="margin-top: 70px; margin-left: 20px" class="table">
+    <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Address</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for customer in customers %}
+        <tr style="width: calc(100% - 250px); height: 60px">
+            <th scope="row">{{ customer.id }}</th>
+            <td>{{ customer.name}}</td>
+            <td>{{ customer.phone }}</td>
+            <td>{{ customer.address }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+.top {
+    display: flex;
+    align-items: flex-end;
+    height: 25vh;
+    background: var(--blue);
+    padding-left: 4rem ;
+    padding-bottom: 1rem;
+}
+
+h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+}

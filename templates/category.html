@@ -1,0 +1,41 @@
+{% extends 'layout/navbar.html' %}
+{% load static %}
+{% block content %}
+<div>
+
+
+    <!-- HEADER -->
+    <section>
+        <div class="hero">
+            <h1>{{ category.name }}</h1>
+            <div class="search">
+                <form action="{% url 'search' %}" method="GET" id="form">
+                    <input type="search" name="query" aria-label="Search" id="search" placeholder="Search">
+                    <button type="submit" id="s-btn"><i class='bx bx-search'></i></button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- PRODCTS -->
+    <section>
+        <div class="product-hero">
+            {% for i in product %}
+            <div class="card">
+                <img src="{{ i.image.url }}" alt="" class="card-img">
+                <div class="card-body">
+                    <div class="card-text">
+                        <h2 class="product-name">{{ i.name }}</h2>
+                        <p class="price">{{ i.variants.first.price }} JDs</p>
+                    </div>
+                    <a href="{% url 'product' product_id=i.id %}" class="icon-div">
+                        <i class='bx bx-cart-add'></i>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </section>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'css/category.css' %}">
+{% endblock %}

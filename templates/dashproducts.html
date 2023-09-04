@@ -1,0 +1,37 @@
+{% extends 'layout/dashboard.html' %}
+
+{% block content %}
+    <div style="margin-top: 70px; margin-left: 30px; width: calc(100% - 95px)">
+        <div class="row">
+            <div class="col-8">
+                <i class="fa-solid fa-boxes-stacked" style="font-size: 30px"></i>
+                <span class="link-name" style="font-size: 30px; margin-left: 5px">Products</span>
+            </div>
+            <div class="col-4">
+                <a href="{% url 'addproduct' %}" class="btn btn-success"><i class="fa-sharp fa-solid fa-plus"></i> Add Product</a>
+            </div>
+        </div>
+
+        <table class="table" style="margin-top: 40px">
+            <thead>
+                <tr>
+                    <th scope="col">Image</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td> <img style="width: 150px" src="/media/{{ product.image }}" alt="product image"></td>
+                        <td>{{ product.name }} <br> <br> {{ product.price }} JDs</td>
+                        <td>
+                            <a href="{% url 'edit' product.id %}" class="btn btn-outline-dark">Edit</a>
+                            <a href="{% url 'deleteProduct' product.id %}"><i class="fa-sharp fa-solid fa-trash-can" style="color: #e82405; font-size: 20px; padding-left: 5px"></i></a>
+                        </td>
+                    </tr>
+                {% endfor%}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

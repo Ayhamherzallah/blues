@@ -1,0 +1,33 @@
+{% extends 'layout/dashboard.html' %}
+{% block content %}
+<div style="width: calc(100% - 95px)">
+ <table style="margin-top: 70px; margin-left: 20px" class="table">
+    <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Shipping</th>
+          <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for order in orders %}
+        <tr style="width: calc(100% - 250px);">
+            <th scope="row">{{ order.id }}</th>
+            <td>{{ order.fName }} {{ order.lName }}</td>
+            <td>{{ order.phone }}</td>
+            <td>{{ order.shipping }}</td>
+            <td>
+                <a href="{% url 'singleorder' order.id %}" class="btn btn-dark">View</a>
+                <a href="{% url 'deleteOrder' order.id %}"><i class="fa-sharp fa-solid fa-trash-can" style="color: #e82405; font-size: 20px; padding-left: 5px"></i></a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{% endblock %}
+
+
