@@ -67,6 +67,7 @@
     opacity: 0;
 }
 
+
 .right button.show {
     transform: translateX(0);
     opacity: 1;
